@@ -25,6 +25,7 @@ module.exports = {
       "@typescript-eslint"
   ],
   "rules": {
+    "no-console": "off",
     "no-shadow":"off",
     "no-param-reassign":"off",
     "no-use-before-define": "off",

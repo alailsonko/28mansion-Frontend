@@ -1,0 +1,42 @@
+/* Color Theme Swatches in Hex */
+.Royal-purple-1-hex { color: #740B7B; }
+.Royal-purple-2-hex { color: #8B3891; }
+.Royal-purple-3-hex { color: #730B7A; }
+.Royal-purple-4-hex { color: #BF4EC7; }
+.Royal-purple-5-hex { color: #430647; }
+
+/* Color Theme Swatches in RGBA */
+.Royal-purple-1-rgba { color: rgba(116, 11, 123, 1); }
+.Royal-purple-2-rgba { color: rgba(139, 56, 145, 1); }
+.Royal-purple-3-rgba { color: rgba(115, 11, 122, 1); }
+.Royal-purple-4-rgba { color: rgba(191, 78, 199, 1); }
+.Royal-purple-5-rgba { color: rgba(67, 6, 71, 1); }
+
+/* Color Theme Swatches in HSLA */
+.Royal-purple-1-hsla { color: hsla(296, 83, 26, 1); }
+.Royal-purple-2-hsla { color: hsla(295, 44, 39, 1); }
+.Royal-purple-3-hsla { color: hsla(296, 83, 26, 1); }
+.Royal-purple-4-hsla { color: hsla(296, 51, 54, 1); }
+.Royal-purple-5-hsla { color: hsla(296, 84, 15, 1); }
+
+
+/* Color Theme Swatches in Hex */
+.purple-steam-on-the-white-background-1-hex { color: #8538A6; }
+.purple-steam-on-the-white-background-2-hex { color: #BF82D9; }
+.purple-steam-on-the-white-background-3-hex { color: #E4C2F2; }
+.purple-steam-on-the-white-background-4-hex { color: #4A0E73; }
+.purple-steam-on-the-white-background-5-hex { color: #F2F2F2; }
+
+/* Color Theme Swatches in RGBA */
+.purple-steam-on-the-white-background-1-rgba { color: rgba(132, 56, 165, 1); }
+.purple-steam-on-the-white-background-2-rgba { color: rgba(190, 130, 216, 1); }
+.purple-steam-on-the-white-background-3-rgba { color: rgba(227, 193, 242, 1); }
+.purple-steam-on-the-white-background-4-rgba { color: rgba(74, 13, 114, 1); }
+.purple-steam-on-the-white-background-5-rgba { color: rgba(242, 242, 242, 1); }
+
+/* Color Theme Swatches in HSLA */
+.purple-steam-on-the-white-background-1-hsla { color: hsla(281, 49, 43, 1); }
+.purple-steam-on-the-white-background-2-hsla { color: hsla(281, 53, 68, 1); }
+.purple-steam-on-the-white-background-3-hsla { color: hsla(281, 65, 85, 1); }
+.purple-steam-on-the-white-background-4-hsla { color: hsla(275, 78, 25, 1); }
+.purple-steam-on-the-white-background-5-hsla { color: hsla(0, 0, 95, 1); }
