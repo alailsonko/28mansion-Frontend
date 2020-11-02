@@ -30,7 +30,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
   return (
     <Form>
       <h1>{message}</h1>
-      <Field type="text" name="email" />
+      <Field type="email" name="email" />
       { touched.email && errors.email && (
       <div>
         {errors.email}
