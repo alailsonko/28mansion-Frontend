@@ -3,11 +3,13 @@ import * as Yup from 'yup';
 import {
   Form, Field, FormikProps, withFormik,
 } from 'formik';
+import { connect, useDispatch } from 'react-redux';
+import { Dispatch } from 'redux';
 import Header from '../../components/Header';
-
 import {
   Container,
 } from './styles';
+import { signin } from '../../store/middlewares/Auth/SignIn/signin.actions';
 
 interface FormValues {
   email: string
@@ -23,7 +25,7 @@ const LoginSchemaValidation = Yup.object({
   password: Yup.string().required(),
 });
 
-const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
+const InnerForm = ({ ...props }: OtherProps & FormikProps<FormValues>) => {
   const {
     touched, errors, isSubmitting, message,
   } = props;
@@ -51,6 +53,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
 interface MyFormProps {
   initialEmail?: string
   message: string
+  dispatch: Dispatch<any>
 }
 
 const MyForm = withFormik<MyFormProps, FormValues>({
@@ -59,22 +62,23 @@ const MyForm = withFormik<MyFormProps, FormValues>({
     password: '',
   }),
   validationSchema: LoginSchemaValidation,
-  handleSubmit: async (values) => {
-    console.log('from submit', values);
-    return values;
+  handleSubmit: async (values, { props, setSubmitting }) => {
+    props.dispatch(signin(values));
+    setSubmitting(false);
   },
 })(InnerForm);
 
 const Login: React.FC = () => {
   console.log('hello');
+  const dispatch = useDispatch();
   return (
     <>
       <Header />
       <Container>
-        <MyForm message="Login" />
+        <MyForm message="Login" dispatch={dispatch} />
       </Container>
     </>
   );
 };
 
-export default Login;
+export default connect()(Login);
