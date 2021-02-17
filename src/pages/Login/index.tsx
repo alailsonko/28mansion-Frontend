@@ -1,23 +1,53 @@
 import React from 'react';
 import * as Yup from 'yup';
-import {
-  Form, Field, FormikProps, withFormik,
-} from 'formik';
+import { withFormik, FormikProps, Form } from 'formik';
 import { connect, useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import Header from '../../components/Header';
 import {
-  Container,
+  Container, Main, WrapperField, FieldInput, Button,
 } from './styles';
 import { signin } from '../../store/middlewares/Auth/SignIn/signin.actions';
 
 interface FormValues {
-  email: string
-  password: string
+  email: string;
+  password: string;
 }
 
 interface OtherProps {
-  message: string
+  message: string;
+}
+
+const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
+  const {
+    touched, errors, isSubmitting, message,
+  } = props;
+  return (
+    <Form>
+      <h1>{message}</h1>
+      <div>
+        <WrapperField>
+          <label htmlFor="email">Email</label>
+          <FieldInput type="email" name="email" />
+          {touched.email && errors.email && <p>{errors.email}</p>}
+        </WrapperField>
+        <WrapperField>
+          <label htmlFor="password">Password</label>
+          <FieldInput type="password" name="password" />
+          {touched.password && errors.password && <p>{errors.password}</p>}
+        </WrapperField>
+        <Button type="submit" disabled={isSubmitting}>
+          Submit
+        </Button>
+      </div>
+    </Form>
+  );
+};
+
+interface LoginFormProps {
+  initialEmail?: string;
+  message: string;
+  dispatch: Dispatch<any>
 }
 
 const LoginSchemaValidation = Yup.object({
@@ -25,38 +55,7 @@ const LoginSchemaValidation = Yup.object({
   password: Yup.string().required(),
 });
 
-const InnerForm = ({ ...props }: OtherProps & FormikProps<FormValues>) => {
-  const {
-    touched, errors, isSubmitting, message,
-  } = props;
-  return (
-    <Form>
-      <h1>{message}</h1>
-      <Field type="email" name="email" />
-      { touched.email && errors.email && (
-      <div>
-        {errors.email}
-      </div>
-      ) }
-      <Field type="password" name="password" />
-      { touched.password && errors.password && (
-      <div>
-        {errors.password}
-      </div>
-      ) }
-      <button type="submit" disabled={isSubmitting}>SignIn</button>
-
-    </Form>
-  );
-};
-
-interface MyFormProps {
-  initialEmail?: string
-  message: string
-  dispatch: Dispatch<any>
-}
-
-const MyForm = withFormik<MyFormProps, FormValues>({
+const LoginForm = withFormik<LoginFormProps, FormValues>({
   mapPropsToValues: (props) => ({
     email: props.initialEmail || '',
     password: '',
@@ -75,7 +74,9 @@ const Login: React.FC = () => {
     <>
       <Header />
       <Container>
-        <MyForm message="Login" dispatch={dispatch} />
+        <Main>
+          <LoginForm message="Sign In" dispatch={dispatch} />
+        </Main>
       </Container>
     </>
   );

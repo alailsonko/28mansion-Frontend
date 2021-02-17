@@ -45,9 +45,8 @@ const GlobalStyles = createGlobalStyle`
 --Global-Citizen-3-rgba-color: rgba(3, 43, 165, 1); 
 --Global-Citizen-4-rgba-color: rgba(1, 23, 89, 1); 
 --Global-Citizen-5-rgba-color: rgba(10, 158, 216, 1);
-
- 
 }
+
 html, body {
   background-color: var(--Metal-white-1-hex-color);
   margin: 0;

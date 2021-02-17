@@ -4,9 +4,17 @@ import {
   SIGNIN_SUCCESS,
 } from './signin.types';
 
+const persistedData = JSON.parse(localStorage.getItem('persist:auth') as any);
+let signinData = {
+  session: {},
+};
+if (persistedData !== null) {
+  signinData = JSON.parse(persistedData.signin);
+}
+
 const initialState = {
   loading: false,
-  session: {},
+  session: signinData.session || {},
   error: '',
 };
 

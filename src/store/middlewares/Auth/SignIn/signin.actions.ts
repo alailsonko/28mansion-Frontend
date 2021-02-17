@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 import api from '../../../../api';
-import { LoginData } from '../../../../usecases/LoginData';
+import { LoginData } from '../../../../usecases/account.interfaces';
 import {
   SIGNIN_FAILURE,
   SIGNIN_REQUEST,
@@ -16,9 +16,9 @@ interface ActionDispatchType {
     payload?: any;
   }
 
-export const signinSuccess = (signinData: LoginData) => ({
+export const signinSuccess = (signedData: any) => ({
   type: SIGNIN_SUCCESS,
-  payload: signinData,
+  payload: signedData.data,
 });
 
 export const signinFailure = (error: Error) => ({
@@ -32,5 +32,5 @@ export const signin = (signinData: LoginData) => async (
   // actions dispatched
   dispatch(signinRequest());
   await api.post('/signin', signinData)
-    .then((data) => console.log(data));
+    .then((data) => dispatch(signinSuccess(data)));
 };
