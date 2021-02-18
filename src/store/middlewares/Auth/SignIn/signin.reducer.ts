@@ -5,9 +5,11 @@ import {
 } from './signin.types';
 
 const persistedData = JSON.parse(localStorage.getItem('persist:auth') as any);
+
 let signinData = {
   session: {},
 };
+
 if (persistedData !== null) {
   signinData = JSON.parse(persistedData.signin);
 }
