@@ -26,6 +26,8 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
   const {
     touched, errors, isSubmitting, message,
   } = props;
+  console.log(isSubmitting);
+
   return (
     <Form>
       <h1>{message}</h1>
@@ -97,8 +99,8 @@ const RegisterForm = withFormik<RegisterFormProps, FormValues>({
   }),
   validationSchema: RegisterSchemaValidation,
   handleSubmit: async (values, { props, setSubmitting }) => {
+    setSubmitting(true);
     props.dispatch(signup(values));
-    setSubmitting(false);
   },
 })(InnerForm);
 
