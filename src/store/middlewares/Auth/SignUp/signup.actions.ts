@@ -1,5 +1,6 @@
 import { Dispatch } from 'redux';
-import api from '../../../../api';
+import createApi from '../../../../api';
+
 import { AddAccount } from '../../../../usecases/account.interfaces';
 import {
   SIGNUP_FAILURE,
@@ -7,6 +8,7 @@ import {
   SIGNUP_SUCCESS,
 } from './signup.types';
 
+const api = createApi();
 export const signupRequest = () => ({
   type: SIGNUP_REQUEST,
 });
@@ -31,5 +33,6 @@ export const signup = (signupData: AddAccount) => async (
 ) => {
   dispatch(signupRequest());
   await api.post('/signup', signupData)
-    .then((data) => console.log(data));
+    .then((response) => dispatch(signupSuccess(response.data)))
+    .catch((error) => dispatch(signupFailure(error.message)));
 };
