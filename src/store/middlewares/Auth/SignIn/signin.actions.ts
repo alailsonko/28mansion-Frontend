@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux';
-import api from '../../../../api';
+import createApi from '../../../../api';
 import { LoginData } from '../../../../usecases/account.interfaces';
 import {
   SIGNIN_FAILURE,
@@ -7,6 +7,7 @@ import {
   SIGNIN_SUCCESS,
 } from './signin.types';
 
+const api = createApi();
 export const signinRequest = () => ({
   type: SIGNIN_REQUEST,
 });
