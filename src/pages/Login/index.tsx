@@ -63,7 +63,7 @@ const LoginForm = withFormik<LoginFormProps, FormValues>({
   validationSchema: LoginSchemaValidation,
   handleSubmit: async (values, { props, setSubmitting }) => {
     props.dispatch(signin(values));
-    setSubmitting(false);
+    setSubmitting(true);
   },
 })(InnerForm);
 
