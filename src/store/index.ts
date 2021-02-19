@@ -5,6 +5,7 @@ import thunkMiddleware from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import { StateType } from 'typesafe-actions';
 import rootReducers from './middlewares';
 
 const authPersistConfig = {
@@ -12,6 +13,7 @@ const authPersistConfig = {
   storage,
   whitelist: ['signin'],
 };
+export type Store = StateType<typeof rootReducers>
 
 export default function configureStore(preloadedState?: {} | undefined) {
   const middlewares = [thunkMiddleware];
@@ -20,10 +22,8 @@ export default function configureStore(preloadedState?: {} | undefined) {
   const enhancers = [middlewareEnhancer];
   const composedEnhancers = composeWithDevTools(...enhancers);
   const persistedReducer = persistReducer(authPersistConfig, rootReducers);
-
-  const storePersisted: any = createStore(persistedReducer, preloadedState);
-  const store: any = createStore(rootReducers, preloadedState, composedEnhancers);
-  const persistor = persistStore(storePersisted);
+  const store: any = createStore(persistedReducer, preloadedState, composedEnhancers);
+  const persistor = persistStore(store);
 
   return { store, persistor };
 }
