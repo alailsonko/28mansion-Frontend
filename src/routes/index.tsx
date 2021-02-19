@@ -1,27 +1,25 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
+import { BrowserRouter } from 'react-router-dom';
+import { useSelector, connect } from 'react-redux';
 import Home from '../pages/Home';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
-import configureStore from '../store';
-
-const { store, persistor }: any = configureStore();
+import PrivateRoute from './PrivateRoute';
+import AuthRoute from './AuthRoute';
+import { Store } from '../store';
 
 function Routes() {
+  const isLogged = useSelector((state: Store) => state.signin.isLogged);
+  const loading = useSelector((state: Store) => state.signin.loading);
+
   return (
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <BrowserRouter>
-          <Route path="/" exact component={Home} />
-          <Route path="/login" exact component={Login} />
-          <Route path="/register" exact component={Register} />
-        </BrowserRouter>
-      </PersistGate>
-    </Provider>
+    <BrowserRouter>
+      <PrivateRoute path="/" exact loading={loading} isLogged={isLogged} component={Home} />
+      <AuthRoute path="/login" exact loading={loading} isLogged={isLogged} component={Login} />
+      <AuthRoute path="/register" exact loading={loading} isLogged={isLogged} component={Register} />
+    </BrowserRouter>
 
   );
 }
 
-export default Routes;
+export default connect()(Routes);
