@@ -1,0 +1,13 @@
+ 
+
+.editorClassName {
+  height: 200px;
+  width: 100%;
+  overflow: hidden;
+  background-color: #FFFF;
+}
+
+.wrapperClassName {
+  height: 400px;
+  width: 500px;
+}
