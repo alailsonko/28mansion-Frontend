@@ -38,6 +38,7 @@ const GlobalStyles = createGlobalStyle`
 --Global-Citizen-3-hex-color: #032CA6; 
 --Global-Citizen-4-hex-color: #021859; 
 --Global-Citizen-5-hex-color: #0B9ED9; 
+--Global-Citizen-6-hex-color: #6EB4B8; 
 
 /* Color Theme Swatches in RGBA */
 --Global-Citizen-1-rgba-color: rgba(242, 92, 162, 1); 
@@ -48,7 +49,7 @@ const GlobalStyles = createGlobalStyle`
 }
 
 html, body {
-  background-color: var(--Metal-white-1-hex-color);
+  background-color: var(--Global-Citizen-6-hex-color);
   margin: 0;
   padding: 0;
   box-sizing: border-box;
