@@ -1,6 +1,4 @@
- 
-
-.editorClassName {
+ .editorClassName {
   height: 200px;
   width: 100%;
   overflow: hidden;
@@ -8,6 +6,12 @@
 }
 
 .wrapperClassName {
-  height: 400px;
-  width: 500px;
+  height: 330px;
+  width: 100%;
+  margin-bottom: 125px;
+}
+
+
+.toolbarClassName {
+  margin-bottom: 56px;
 }
