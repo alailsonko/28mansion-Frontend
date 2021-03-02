@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import Header from '../../components/Header';
 import RichTextEditor from '../../components/RichTextEditor';
-import { getPosts } from '../../store/middlewares/Auth/Posts/posts.actions';
+import { getPosts } from '../../store/middlewares/Posts/posts.get.actions';
 import { Store } from '../../store';
 import {
   Container,
