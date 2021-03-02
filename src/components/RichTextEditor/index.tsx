@@ -2,7 +2,10 @@ import React from 'react';
 import { EditorState, convertToRaw } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import { useDispatch } from 'react-redux';
 import './styles.css';
+import { savePost } from '../../store/middlewares/Posts/posts.post.actions';
+import { AddPost } from '../../usecases/post.interfaces';
 import {
   Container,
   ButtonsWrapper,
@@ -11,21 +14,30 @@ import {
   PublishAnArticle,
 } from './styles';
 
-// Import and add to your Editor's plugins
-
 function RichTextEditor() {
   const [editorState, setEditorState] = React.useState(
     () => EditorState.createEmpty(),
   );
   const [hidRichText, setHidRichText] = React.useState<boolean>(true);
-  const [title, setTitle] = React.useState<string>('');
+  const [titleState, setTitleState] = React.useState<string>('');
   const { blocks } = convertToRaw(editorState.getCurrentContent());
   const value = blocks.map((block) => (!block.text.trim() && '\n') || block.text).join('\n');
   console.log(value);
-  console.log(blocks);
-  console.log(title);
+  const dispatch = useDispatch();
   const handleSubmit = () => {
-    console.log({ title, content: editorState });
+    // const buffer = msgpack.encode((editorState));
+    // console.log(buffer);
+
+    const postPublish: AddPost = {
+      title: titleState,
+      content: value,
+      tags: [],
+      status: 'public',
+    };
+    dispatch(savePost(postPublish));
+    setTitleState('');
+    setEditorState(() => EditorState.createEmpty());
+    console.log(postPublish);
   };
   return (
     <Container>
@@ -36,7 +48,7 @@ function RichTextEditor() {
         </PublishAnArticle>
       ) : (
         <>
-          <TitleInput value={title} onChange={(e) => { setTitle(e.target.value); }} placeholder="Enter a title..." />
+          <TitleInput value={titleState} onChange={(e) => { setTitleState(e.target.value); }} placeholder="Enter a title..." />
           <Editor
             editorState={editorState}
             toolbarClassName="toolbarClassName"
