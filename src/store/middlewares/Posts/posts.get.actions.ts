@@ -1,9 +1,9 @@
 import { Dispatch } from 'redux';
-import createAPI, { getToken } from '../../../../api';
+import createAPI, { getToken } from '../../../api';
 import {
-  POSTS_FAILURE,
-  POSTS_REQUEST,
-  POSTS_SUCCESS,
+  GET_POSTS_FAILURE,
+  GET_POSTS_REQUEST,
+  GET_POSTS_SUCCESS,
 } from './posts.types';
 
 const token = getToken();
@@ -11,7 +11,7 @@ const token = getToken();
 const api = createAPI(token);
 
 export const getPostsRequest = () => ({
-  type: POSTS_REQUEST,
+  type: GET_POSTS_REQUEST,
 });
 
 interface ActionDispatchType {
@@ -20,12 +20,12 @@ interface ActionDispatchType {
   }
 
 export const getPostsSuccess = (getPostsData: any) => ({
-  type: POSTS_SUCCESS,
+  type: GET_POSTS_SUCCESS,
   payload: getPostsData,
 });
 
 export const getPostsFailure = (error: Error) => ({
-  type: POSTS_FAILURE,
+  type: GET_POSTS_FAILURE,
   payload: error,
 });
 
