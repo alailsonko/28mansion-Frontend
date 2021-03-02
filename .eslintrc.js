@@ -25,6 +25,8 @@ module.exports = {
     '@typescript-eslint',
   ],
   rules: {
+    'class-methods-use-this': 'off',
+    'max-classes-per-file': 'off',
     'jsx-a11y/label-has-associated-control': 'off',
     'react/jsx-props-no-spreading': 'off',
     'react/no-unused-prop-types': 'off',
