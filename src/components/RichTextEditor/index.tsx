@@ -13,6 +13,7 @@ import {
   TitleInput,
   PublishAnArticle,
 } from './styles';
+import { getPosts } from '../../store/middlewares/Posts/posts.get.actions';
 
 function RichTextEditor() {
   const [editorState, setEditorState] = React.useState(
@@ -35,6 +36,7 @@ function RichTextEditor() {
       status: 'public',
     };
     dispatch(savePost(postPublish));
+    dispatch(getPosts());
     setTitleState('');
     setEditorState(() => EditorState.createEmpty());
     console.log(postPublish);
