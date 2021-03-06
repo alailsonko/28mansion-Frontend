@@ -1,3 +1,4 @@
+/* eslint-disable arrow-body-style */
 import { Dispatch } from 'redux';
 import createAPI, { getToken } from '../../../api';
 import {
@@ -5,7 +6,6 @@ import {
   SAVE_POST_REQUEST,
   SAVE_POST_SUCCESS,
 } from './posts.types';
-import { getPosts } from './posts.get.actions';
 
 const token = getToken();
 
@@ -41,7 +41,6 @@ export const savePost = (savePostData: any, tokenData = token) => async (
     },
   })
     .then((res) => {
-      getPosts(token);
       return dispatch(savePostSuccess(res.data));
     })
     .catch((error) => dispatch(savePostFailure(error.message)));

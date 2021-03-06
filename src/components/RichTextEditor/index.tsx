@@ -36,9 +36,9 @@ function RichTextEditor() {
       status: 'public',
     };
     dispatch(savePost(postPublish));
-    dispatch(getPosts());
     setTitleState('');
     setEditorState(() => EditorState.createEmpty());
+    dispatch(getPosts());
     console.log(postPublish);
   };
   return (
