@@ -38,7 +38,9 @@ function RichTextEditor() {
     dispatch(savePost(postPublish));
     setTitleState('');
     setEditorState(() => EditorState.createEmpty());
-    dispatch(getPosts());
+    setTimeout(() => {
+      dispatch(getPosts());
+    }, 500);
     console.log(postPublish);
   };
   return (
