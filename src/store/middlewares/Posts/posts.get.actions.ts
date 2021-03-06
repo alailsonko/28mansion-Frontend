@@ -32,14 +32,14 @@ export const getPostsFailure = (error: Error) => ({
   payload: error,
 });
 
-export const getPosts = (token: string) => async (
+export const getPosts = (tokenData = token) => async (
   dispatch: Dispatch<ActionDispatchType>,
 ) => {
   // actions dispatched
   dispatch(getPostsRequest());
   await api.get('/posts', {
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${tokenData}`,
     },
   })
     .then((res) => dispatch(getPostsSuccess(res.data)))
