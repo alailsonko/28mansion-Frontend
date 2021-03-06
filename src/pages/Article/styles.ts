@@ -57,8 +57,22 @@ export const Delete = styled.button``;
 
 export const Title = styled.h4``;
 
+export const WrapperInfo = styled.div`
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  flex-direction: row;
+  background-color: grey;
+  border-radius: 10px;
+  margin-top: 10vh;
+`;
+
+export const Info = styled.h4`
+  margin: 15px 30px;
+`;
+
 export const WrapperRedirect = styled.div`
-  background-color: red;
+  background-color: #fff;
 `;
 
 export const BackTo = styled.div`
@@ -69,4 +83,5 @@ export const BackTo = styled.div`
 
 export const BackToIcon = styled(FiArrowLeft)`
    cursor: pointer;
+   color: black;
 `;

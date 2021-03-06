@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React, { useEffect, useState } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
@@ -5,6 +6,7 @@ import Header from '../../components/Header';
 import { Store } from '../../store';
 
 import { getOnePost, getPosts } from '../../store/middlewares/Posts/posts.get.actions';
+import { deletePost } from '../../store/middlewares/Posts/posts.delete.actions';
 import {
   Avatar,
   Content,
@@ -18,6 +20,8 @@ import {
   WrapperRedirect,
   BackTo,
   BackToIcon,
+  WrapperInfo,
+  Info,
 } from './styles';
 
 interface OwnProps {
@@ -38,20 +42,44 @@ const Post: React.FC<Props> = (props: Props) => {
     posts, match, loading, token,
   } = props;
   const [redirect, setRedirect] = useState<boolean>(false);
+  const [deleted, setDeleted] = useState<boolean>(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getOnePost(match.params.id, token));
+    if (!deleted) {
+      dispatch(getOnePost(match.params.id, token));
+    }
   }, [dispatch, loading]);
-  const updateStatePost = (e: any) => {
+  const updateStatePost = (e?: any) => {
     e.preventDefault();
     dispatch(getPosts(token));
     setRedirect(true);
   };
+  const handleDeletePost = (e: any) => {
+    e.preventDefault();
+    dispatch(deletePost(posts.data.id, token));
+    setDeleted(true);
+  };
   // eslint-disable-next-line no-nested-ternary
   return (typeof posts.data.user !== 'undefined' && loading ? (
     <div>loading</div>
-  ) : redirect ? (<Redirect to="/" />) : (
+  ) : redirect ? (<Redirect to="/" />) : deleted && !posts.loading ? (
+    <>
+      <Header />
+      <WrapperRedirect>
+        <Link to="/" onClick={updateStatePost}>
+          <BackTo>
+            <BackToIcon size="35" />
+          </BackTo>
+        </Link>
+      </WrapperRedirect>
+      <WrapperInfo>
+        <Info>
+          {posts.data}
+        </Info>
+      </WrapperInfo>
+    </>
+  ) : (
     <>
       <Header />
       <WrapperRedirect>
@@ -72,7 +100,7 @@ const Post: React.FC<Props> = (props: Props) => {
             <Username>{posts.data.user.username}</Username>
           ) : (<div>loading</div>) }
           <WrapperActions>
-            <Delete>Delete</Delete>
+            <Delete onClick={handleDeletePost}>Delete</Delete>
           </WrapperActions>
         </WrapperUserInfo>
         <PostContent>
