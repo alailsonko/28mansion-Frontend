@@ -10,6 +10,7 @@ border-radius: 30px;
 margin: 0 20px;
 padding-bottom: 20px;
 margin-bottom: 20px;
+margin-top: 50px;
 `;
 
 export const PostContent = styled.div`
