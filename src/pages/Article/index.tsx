@@ -7,6 +7,7 @@ import { Store } from '../../store';
 
 import { getOnePost, getPosts } from '../../store/middlewares/Posts/posts.get.actions';
 import { deletePost } from '../../store/middlewares/Posts/posts.delete.actions';
+import { updatePost } from '../../store/middlewares/Posts/posts.put.actions';
 import {
   Avatar,
   Content,
@@ -22,7 +23,13 @@ import {
   BackToIcon,
   WrapperInfo,
   Info,
+  Edit,
+  InputEditTitle,
+  InputEditContent,
+  Cancel,
+  Confirm,
 } from './styles';
+import { AddPost } from '../../usecases/post.interfaces';
 
 interface OwnProps {
   loading: boolean
@@ -43,6 +50,9 @@ const Post: React.FC<Props> = (props: Props) => {
   } = props;
   const [redirect, setRedirect] = useState<boolean>(false);
   const [deleted, setDeleted] = useState<boolean>(false);
+  const [edit, setEdit] = useState<boolean>(false);
+  const [title, setTitle] = useState<string>('');
+  const [content, setContent] = useState<string>('');
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -59,6 +69,35 @@ const Post: React.FC<Props> = (props: Props) => {
     e.preventDefault();
     dispatch(deletePost(posts.data.id, token));
     setDeleted(true);
+  };
+  const handleEditPost = (e: any) => {
+    e.preventDefault();
+    if (edit) {
+      setTitle('');
+      setContent('');
+      setEdit(false);
+      return;
+    }
+    setEdit(true);
+    console.log('edit post');
+  };
+  const handleConfirmPost = (e: any) => {
+    e.preventDefault();
+    const updatePublish: AddPost = {
+      title,
+      content,
+      tags: ['onetag', 'tagto', 'threetag'],
+      status: 'public',
+    };
+    dispatch(updatePost(updatePublish, posts.data.id, token));
+    setEdit(false);
+  };
+  const handleChangeTitle = (e: any) => {
+    setTitle(e.target.value);
+    console.log(title);
+  };
+  const handleChangeContent = (e: any) => {
+    setContent(e.target.value);
   };
   // eslint-disable-next-line no-nested-ternary
   return (typeof posts.data.user !== 'undefined' && loading ? (
@@ -100,12 +139,43 @@ const Post: React.FC<Props> = (props: Props) => {
             <Username>{posts.data.user.username}</Username>
           ) : (<div>loading</div>) }
           <WrapperActions>
-            <Delete onClick={handleDeletePost}>Delete</Delete>
+            {!edit ? (
+              <>
+                <Edit onClick={handleEditPost}>Edit</Edit>
+                <Delete onClick={handleDeletePost}>Delete</Delete>
+              </>
+            ) : (
+              <>
+                <Confirm onClick={handleConfirmPost}>Confirm</Confirm>
+                <Cancel onClick={handleEditPost}>Cancel</Cancel>
+              </>
+
+            )}
           </WrapperActions>
         </WrapperUserInfo>
         <PostContent>
-          <Title>{posts.data.title}</Title>
-          <Content>{posts.data.content}</Content>
+          {!edit ? (
+            <>
+              { title === '' ? (
+                <Title>{posts.data.title}</Title>
+              ) : (
+                <Title>{title}</Title>
+              )}
+            </>
+          ) : (
+            <InputEditTitle type="text" onChange={handleChangeTitle} placeholder="insert a new title..." name="edit-title" />
+          )}
+          {!edit ? (
+            <>
+              { content === '' ? (
+                <Content>{posts.data.content}</Content>
+              ) : (
+                <Content>{content}</Content>
+              )}
+            </>
+          ) : (
+            <InputEditContent placeholder="insert a new content..." onChange={handleChangeContent} name="edit-content" />
+          )}
         </PostContent>
 
       </WrapperPost>
