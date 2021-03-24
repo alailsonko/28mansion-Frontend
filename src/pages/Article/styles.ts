@@ -52,9 +52,26 @@ export const WrapperTags = styled.div``;
 
 export const Tag = styled.div``;
 
-export const WrapperActions = styled.div``;
+export const WrapperActions = styled.div`
+  margin-left: 25px;
+  display: flex;
+  flex-direction: column;
+  top: auto;
+`;
 
-export const Delete = styled.button``;
+export const Delete = styled.button`
+  background-color: red;
+  border-radius: 15px;
+  width: 60px;
+  height: 25px;
+`;
+
+export const Edit = styled.button`
+  background-color: orange;
+  border-radius: 15px;
+  width: 60px;
+  height: 25px;
+`;
 
 export const Title = styled.h4``;
 
@@ -85,4 +102,37 @@ export const BackTo = styled.div`
 export const BackToIcon = styled(FiArrowLeft)`
    cursor: pointer;
    color: black;
+`;
+
+export const InputEditTitle = styled.input`
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 250px;
+  height: 30px;
+  font-size: 24px;
+  font-weight: bold;
+`;
+
+export const InputEditContent = styled.textarea`
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 250px;
+  height: 300px;
+  font-size: 18px;
+  font-weight: 500;
+`;
+
+export const Confirm = styled.button`
+  background-color: yellow;
+  border-radius: 15px;
+  width: 60px;
+  height: 25px;
+`;
+
+export const Cancel = styled.button`
+  background-color: red;
+  border-radius: 15px;
+  width: 60px;
+  height: 25px;
+
 `;
