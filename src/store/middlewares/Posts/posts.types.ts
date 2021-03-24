@@ -10,3 +10,6 @@ export const DELETE_POST_FAILURE = '@posts/DELETE_POST_FAILURE';
 export const SAVE_POST_REQUEST = '@posts/SAVE_POST_REQUEST';
 export const SAVE_POST_SUCCESS = '@posts/SAVE_POST_SUCCESS';
 export const SAVE_POST_FAILURE = '@posts/SAVE_POST_FAILURE';
+export const UPDATE_POST_REQUEST = '@posts/UPDATE_POST_REQUEST';
+export const UPDATE_POST_SUCCESS = '@posts/UPDATE_POST_SUCCESS';
+export const UPDATE_POST_FAILURE = '@posts/UPDATE_POST_FAILURE';
