@@ -11,6 +11,9 @@ import {
   DELETE_POST_REQUEST,
   DELETE_POST_SUCCESS,
   DELETE_POST_FAILURE,
+  UPDATE_POST_REQUEST,
+  UPDATE_POST_SUCCESS,
+  UPDATE_POST_FAILURE,
 } from './posts.types';
 
 const initialState = {
@@ -34,6 +37,7 @@ export default function getPosts(
     case SAVE_POST_REQUEST:
     case GET_POST_REQUEST:
     case DELETE_POST_REQUEST:
+    case UPDATE_POST_REQUEST:
       return {
         ...state,
         loading: true,
@@ -45,6 +49,12 @@ export default function getPosts(
         ...state,
         loading: false,
         data: action.payload,
+        error: '',
+      };
+    case UPDATE_POST_SUCCESS:
+      return {
+        ...state,
+        loading: false,
         error: '',
       };
     case GET_POSTS_FAILURE:
@@ -64,6 +74,7 @@ export default function getPosts(
         error: '',
       };
     case SAVE_POST_FAILURE:
+    case UPDATE_POST_FAILURE:
       return {
         ...state,
         loading: false,
