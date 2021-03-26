@@ -28,7 +28,7 @@ function RichTextEditor() {
   const handleSubmit = () => {
     // const buffer = msgpack.encode((editorState));
     // console.log(buffer);
-
+  // action
     const postPublish: AddPost = {
       title: titleState,
       content: value,
